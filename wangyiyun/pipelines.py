@@ -6,6 +6,7 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from pymongo import MongoClient
+import csv
 class WangyiyunPipeline(object):
     def process_item(self, item, spider):
 
@@ -42,3 +43,20 @@ class WangyiyunPipeline(object):
         table.update({'id': item['id']},data,True)
         #self.db[self.collection_name].update({'id': item['id']}, dict(item), True)
         return "OK!"
+
+class WangyinPipeline(object):
+
+    def __init__(self):
+        self.f = open("wangyiyun.csv", "w")
+        self.writer = csv.writer(self.f)
+        self.writer.writerow(['歌曲名称', '歌手', '专辑', '评论总数'])
+
+
+    def process_item(self, item, spider):
+        wangyiyun_list =  [item['name'], item['singer'], item['album'], item['comment_total']]
+
+        self.writer.writerow(wangyiyun_list)
+        return item
+    def close_spider(self, spider):#关闭
+        self.writer.close()
+        self.f.close()

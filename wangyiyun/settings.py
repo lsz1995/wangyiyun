@@ -75,7 +75,9 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'wangyiyun.pipelines.WangyiyunPipeline': 300,
+    #'wangyiyun.pipelines.WangyiyunPipeline': 300,
+    'wangyiyun.pipelines.WangyinPipeline': 200,
+
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
